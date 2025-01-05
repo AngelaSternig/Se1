@@ -1,6 +1,11 @@
 package at.aau.serg.exercises.gamelogic;
 
 public class Character {
+
+    private CharacterClass characterClass;
+    private DamageEffect damageEffect;
+
+
     private String name;
 
     private Integer level;
@@ -8,7 +13,6 @@ public class Character {
     /**
      * Allowed classes: Mage, Tank, DamageDealer
      */
-    private String characterClass;
 
     private double damage;
 
@@ -27,7 +31,6 @@ public class Character {
     /**
      * None (null), fire, poison, pierce
      */
-    private String damageEffect;
 
     /**
      * Indicates if a tank currently has their shield equipped
