@@ -4,12 +4,19 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+
 
 public class MyMathTest {
 
+    private MyMath myMath;
+
+    @BeforeEach
+    public void setUp() {
+        myMath = new MyMath();
+    }
     @Test
     public void test1() {
-        MyMath myMath = new MyMath();
         Double add = myMath.add(1d, 2d);
 
         if (!add.equals(3d)) {
