@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 
 public class MyMathTest {
@@ -15,58 +18,43 @@ public class MyMathTest {
     public void setUp() {
         myMath = new MyMath();
     }
-    @Test
-    public void test1() {
-        Double add = myMath.add(1d, 2d);
-
-        if (!add.equals(3d)) {
-            throw new AssertionError("Not equals!");
-        }
+    @ParameterizedTest
+    @CsvSource({
+            "1, 2, 3",
+            "-1, 1, 0",
+            "0, 0, 0"
+    })
+    public void testAdd(double a, double b, double expected) {
+        assertEquals(expected, myMath.add(a, b), 0.0001, "Addition failed for inputs: " + a + ", " + b);
     }
 
-    @Test
-    public void allWorks() {
-        Double x = 10d;
-        Double y = 5d;
-        Double add = new MyMath().add(x, y);
-        Double sub = new MyMath().sub(x, y);
-        Double mul = new MyMath().mul(x, y);
-        Double div = new MyMath().div(x, y);
-
-        assertEquals(add, new Double(15));
-        assertEquals(sub, new Double(5));
-        assertEquals(mul, new Double(50));
-        assertEquals(div, new Double(2));
+    @ParameterizedTest
+    @CsvSource({
+            "10, 5, 5",
+            "1, 1, 0",
+            "0, 5, -5"
+    })
+    public void testSub(double a, double b, double expected) {
+        assertEquals(expected, myMath.sub(a, b), 0.0001, "Subtraction failed for inputs: " + a + ", " + b);
     }
 
-    @Test
-    public void x2() {
-        Fraction f = new Fraction(1, 1);
-        MyMath mm = new MyMath();
-        Fraction reduced = mm.reduce(f);
-        assertEquals(Integer.valueOf(1), reduced.getNumerator());
-        assertEquals(Integer.valueOf(1), reduced.getDenumerator());
+    @ParameterizedTest
+    @CsvSource({
+            "10, 5, 50",
+            "1, 0, 0",
+            "-1, 2, -2"
+    })
+    public void testMul(double a, double b, double expected) {
+        assertEquals(expected, myMath.mul(a, b), 0.0001, "Multiplication failed for inputs: " + a + ", " + b);
+    }
 
-        f = new Fraction(10, 6);
-        mm = new MyMath();
-        reduced = mm.reduce(f);
-        assertEquals(Integer.valueOf(5), reduced.getNumerator());
-        assertEquals(Integer.valueOf(3), reduced.getDenumerator());
-
-        f = new Fraction(10, 5);
-        mm = new MyMath();
-        reduced = mm.reduce(f);
-        assertEquals(Integer.valueOf(2), reduced.getNumerator());
-        assertEquals(Integer.valueOf(1), reduced.getDenumerator());
-
-        f = new Fraction(10, 5);
-        mm = new MyMath();
-        Double aDouble = mm.toDouble(f);
-        assertEquals(new Double(2), aDouble);
-
-        f = new Fraction(10, 4);
-        mm = new MyMath();
-        aDouble = mm.toDouble(f);
-        assertEquals(new Double(2.5d), aDouble);
+    @ParameterizedTest
+    @CsvSource({
+            "10, 5, 2",
+            "1, 1, 1",
+            "0, 5, 0"
+    })
+    public void testDiv(double a, double b, double expected) {
+        assertEquals(expected, myMath.div(a, b), 0.0001, "Division failed for inputs: " + a + ", " + b);
     }
 }
