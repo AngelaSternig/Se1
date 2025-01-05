@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 
 
 public class MyMathTest {
@@ -39,5 +42,17 @@ public class MyMathTest {
     @Test
     public void testDivByZero() {
         assertEquals(Double.NaN, myMath.div(10d, 0d), 0.0001, "Division by zero should return NaN");
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "10, 5, 2.0",
+            "10, 4, 2.5"
+    })
+    public void testToDouble(int numerator, int denominator, double expectedValue) {
+        Fraction input = new Fraction(numerator, denominator);
+        double result = myMath.toDouble(input);
+
+        assertEquals(expectedValue, result, 0.0001, "Conversion to double failed");
     }
 }
