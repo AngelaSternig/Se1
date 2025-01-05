@@ -2,10 +2,6 @@ package at.aau.serg.exercises.gamelogic;
 
 public abstract class Character {
 
-    private CharacterClass characterClass;
-    private DamageEffect damageEffect;
-    private DamageType damageType;
-
     private String name;
 
     private Integer level;
@@ -144,9 +140,12 @@ class DamageDealer extends Character {
     }
 }
 
+// DamageType Enum
+enum DamageType {
+    MELEE, RANGE, MAGIC
+}
 
-    public boolean hasMaxLevel(){
-        return level.equals(30);
-    }
-
+// DamageEffect Enum
+enum DamageEffect {
+    NONE, FIRE, POISON, PIERCE
 }
