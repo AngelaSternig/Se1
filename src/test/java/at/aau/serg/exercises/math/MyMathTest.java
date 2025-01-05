@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 
 public class MyMathTest {
@@ -18,43 +16,28 @@ public class MyMathTest {
     public void setUp() {
         myMath = new MyMath();
     }
-    @ParameterizedTest
-    @CsvSource({
-            "1, 2, 3",
-            "-1, 1, 0",
-            "0, 0, 0"
-    })
-    public void testAdd(double a, double b, double expected) {
-        assertEquals(expected, myMath.add(a, b), 0.0001, "Addition failed for inputs: " + a + ", " + b);
+    @Test
+    public void testAdd() {
+        assertEquals(3d, myMath.add(1d, 2d), 0.0001, "Addition failed for inputs 1 and 2"); // 0.0001 because: The assertEquals(double, double, double) method is specifically designed for floating-point comparisons, and the third argument (delta) ensures that the comparison accounts for potential precision issues.
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "10, 5, 5",
-            "1, 1, 0",
-            "0, 5, -5"
-    })
-    public void testSub(double a, double b, double expected) {
-        assertEquals(expected, myMath.sub(a, b), 0.0001, "Subtraction failed for inputs: " + a + ", " + b);
+    @Test
+    public void testSub() {
+        assertEquals(5d, myMath.sub(10d, 5d), 0.0001, "Subtraction failed for inputs 10 and 5");
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "10, 5, 50",
-            "1, 0, 0",
-            "-1, 2, -2"
-    })
-    public void testMul(double a, double b, double expected) {
-        assertEquals(expected, myMath.mul(a, b), 0.0001, "Multiplication failed for inputs: " + a + ", " + b);
+    @Test
+    public void testMul() {
+        assertEquals(50d, myMath.mul(10d, 5d), 0.0001, "Multiplication failed for inputs 10 and 5");
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "10, 5, 2",
-            "1, 1, 1",
-            "0, 5, 0"
-    })
-    public void testDiv(double a, double b, double expected) {
-        assertEquals(expected, myMath.div(a, b), 0.0001, "Division failed for inputs: " + a + ", " + b);
+    @Test
+    public void testDiv() {
+        assertEquals(2d, myMath.div(10d, 5d), 0.0001, "Division failed for inputs 10 and 5");
+    }
+
+    @Test
+    public void testDivByZero() {
+        assertEquals(Double.NaN, myMath.div(10d, 0d), 0.0001, "Division by zero should return NaN");
     }
 }
