@@ -1,12 +1,10 @@
 package at.aau.serg.exercises.gamelogic;
 
-public class Character {
+public abstract class Character {
 
     private CharacterClass characterClass;
     private DamageEffect damageEffect;
     private DamageType damageType;
-
-
 
     private String name;
 
@@ -18,17 +16,21 @@ public class Character {
 
     private double damage;
 
+    public Character(String name, int level, double damage) {
+        this.name = name;
+        this.level = level;
+        this.damage = damage;
+    }
+
     /**
      * Used for range and magic damage types, melee ignores this value
      */
-    private int damageRange;
 
     /**
      * 1 := melee (tank always has this)
      * 2 := range
      * 3 := magic (only mage has this, always)
      */
-    private short damageType;
 
     /**
      * None (null), fire, poison, pierce
@@ -37,25 +39,64 @@ public class Character {
     /**
      * Indicates if a tank currently has their shield equipped
      */
-    private boolean hasShieldEquipped;
 
     /**
      * Available mana of mage
      */
-    private int mana;
 
-    public String getDescription() {
-        switch (characterClass) {
-            case "Mage":
-                return "Mage: A spellcaster who wields powerful magic.";
-            case "Tank":
-                return "Tank: A sturdy protector who absorbs damage and defends allies.";
-            case "DamageDealer":
-                return "Damage Dealer: A swift attacker who deals heavy damage.";
-            default:
-                throw new IllegalStateException("Unexpected character class: " + characterClass);
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public void setDamage(double damage) {
+        this.damage = damage;
+    }
+
+    public boolean hasMaxLevel() {
+        return this.level == 30;
+    }
+
+    public abstract String getDescription();
+}
+
+    class DamageDealer extends Character {
+        private DamageType damageType;
+
+        public DamageDealer(String name, int level, double damage, DamageType damageType) {
+            super(name, level, damage); // Call the superclass constructor correctly
+            this.damageType = damageType;
+        }
+
+        public DamageType getDamageType() {
+            return damageType;
+        }
+
+        public void setDamageType(DamageType damageType) {
+            this.damageType = damageType;
+        }
+
+        @Override
+        public String getDescription() {
+            return "Damage Dealer: A swift attacker who deals heavy damage.";
         }
     }
+
 
     public boolean hasMaxLevel(){
         return level.equals(30);
