@@ -55,4 +55,18 @@ public class MyMathTest {
 
         assertEquals(expectedValue, result, 0.0001, "Conversion to double failed");
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, 1, 1, 1",
+            "10, 6, 5, 3",
+            "10, 5, 2, 1"
+    })
+    public void testReduce(int numerator, int denominator, int expectedNumerator, int expectedDenominator) {
+        Fraction input = new Fraction(numerator, denominator);
+        Fraction reduced = myMath.reduce(input);
+
+        assertEquals(expectedNumerator, reduced.getNumerator(), 0.0001, "Numerator reduction failed");
+        assertEquals(expectedDenominator, reduced.getDenumerator(), 0.0001, "Denominator reduction failed");
+    }
 }
