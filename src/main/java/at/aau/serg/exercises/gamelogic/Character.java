@@ -75,27 +75,74 @@ public abstract class Character {
     public abstract String getDescription();
 }
 
-    class DamageDealer extends Character {
-        private DamageType damageType;
+// Mage class
+class Mage extends Character {
+    private int mana;
 
-        public DamageDealer(String name, int level, double damage, DamageType damageType) {
-            super(name, level, damage); // Call the superclass constructor correctly
-            this.damageType = damageType;
-        }
-
-        public DamageType getDamageType() {
-            return damageType;
-        }
-
-        public void setDamageType(DamageType damageType) {
-            this.damageType = damageType;
-        }
-
-        @Override
-        public String getDescription() {
-            return "Damage Dealer: A swift attacker who deals heavy damage.";
-        }
+    public Mage(String name, int level, double damage, int mana) {
+        super(name, level, damage);
+        this.mana = mana;
     }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Mage: A spellcaster who wields powerful magic.";
+    }
+}
+
+// Tank class
+class Tank extends Character {
+    private boolean hasShieldEquipped;
+
+    public Tank(String name, int level, double damage, boolean hasShieldEquipped) {
+        super(name, level, damage);
+        this.hasShieldEquipped = hasShieldEquipped;
+    }
+
+    public boolean hasShieldEquipped() {
+        return hasShieldEquipped;
+    }
+
+    public void setShieldEquipped(boolean hasShieldEquipped) {
+        this.hasShieldEquipped = hasShieldEquipped;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Tank: A sturdy protector who absorbs damage and defends allies.";
+    }
+}
+
+// DamageDealer class
+class DamageDealer extends Character {
+    private DamageType damageType;
+
+    public DamageDealer(String name, int level, double damage, DamageType damageType) {
+        super(name, level, damage);
+        this.damageType = damageType;
+    }
+
+    public DamageType getDamageType() {
+        return damageType;
+    }
+
+    public void setDamageType(DamageType damageType) {
+        this.damageType = damageType;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Damage Dealer: A swift attacker who deals heavy damage.";
+    }
+}
 
 
     public boolean hasMaxLevel(){
