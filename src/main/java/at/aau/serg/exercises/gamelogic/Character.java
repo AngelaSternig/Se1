@@ -4,6 +4,8 @@ public class Character {
 
     private CharacterClass characterClass;
     private DamageEffect damageEffect;
+    private DamageType damageType;
+
 
 
     private String name;
